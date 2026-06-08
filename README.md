@@ -7,7 +7,12 @@ Dibuat dengan app **stow** untuk menyimpan dan memilih konfigurasi yang cocok un
 ## Data Konfigurasi
 
 Konfigurasi yang ada :
-1. FastFetch
-2. Swaybar
-3. Sway
+1. Sway + Waybar
+2. FastFetch
 4. Vim
+
+## Tampilan Konfigurasi 
+
+### Sway + Waybar
+
+![Waybar](example/Waybar.png)

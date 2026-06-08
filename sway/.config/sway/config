@@ -1,0 +1,143 @@
+# ==========================================
+# KONFIGURASI DASAR
+# ==========================================
+
+# Mengatur tombol modifier (Mod4 adalah tombol Super / Windows)
+set $mod Mod4
+
+# Mengatur terminal bawaan (ubah sesuai terminal yang Anda gunakan, misal: alacritty, foot, atau kitty)
+set $term kitty
+
+# ==========================================
+# PENGATURAN LAYAR & INPUT
+# ==========================================
+
+# Mengatur resolusi layar menjadi 1366 x 768
+output * resolution 1366x768
+
+# Mengatur trackpad/touchpad agar tap-to-click (termasuk double click) berfungsi
+input type:touchpad {
+    tap enabled
+    # Menghapus tanda pagar (#) di bawah ini jika ingin scroll natural (seperti di Mac)
+    # natural_scroll enabled
+}
+
+# ==========================================
+# AUTOSTART (APLIKASI YANG BERJALAN OTOMATIS)
+# ==========================================
+
+# Mengembalikan wallpaper terakhir menggunakan waypaper
+exec_always waypaper --restore
+
+# ==========================================
+# STATUS BAR
+# ==========================================
+
+# Menjalankan Waybar sebagai status bar pengganti swaybar bawaan
+bar {
+    swaybar_command waybar
+}
+
+# ==========================================
+# SHORTCUT KEYBINDINGS (PINTASAN KEYBOARD)
+# ==========================================
+
+# Menjalankan Terminal
+bindsym $mod+Return exec $term
+
+# Menjalankan App Launcher (Wofi)
+# Shortcut: Super + D
+bindsym $mod+d exec rofi -show drun -show-icons
+
+# Mengambil Screenshot (Grim)
+# Shortcut: Tombol Print Screen
+# Gambar akan disimpan di folder ~/Pictures dengan format waktu
+bindsym Print exec grim ~/Pictures/Screenshot-$(date +'%Y-%m-%d-%H%M%S').png
+
+# Menutup aplikasi yang sedang aktif
+# Shortcut: Super + Q (atau sesuaikan dengan kebiasaan, sering kali Super + Shift + Q)
+bindsym $mod+Shift+q kill
+
+# Memuat ulang konfigurasi Sway (Reload) tanpa harus logout
+# Shortcut: Super + Shift + C
+bindsym $mod+Shift+c reload
+
+# Keluar dari Sway (Logout)
+# Shortcut: Super + Shift + E
+bindsym $mod+Shift+e exec swaynag -t warning -m 'Anda yakin ingin keluar dari Sway?' -B 'Ya, Keluar' 'swaymsg exit'
+
+# ==========================================
+# KUNCI LAYAR, KECERAHAN, DAN VOLUME
+# ==========================================
+
+# 1. Mengunci Layar (Swaylock)
+# Shortcut: Super + L
+# Parameter -f (fork) agar berjalan di background, -c 000000 untuk warna latar hitam
+# Mengambil path wallpaper terakhir dari config waypaper secara otomatis
+# bindsym $mod+l exec swaylock -i $(grep 'wallpaper =' ~/.config/waypaper/config.ini | cut -d ' ' -f 3)
+
+# 2. Mengatur Kecerahan Layar (Brightnessctl)
+# Menggunakan tombol khusus brightness pada keyboard laptop (biasanya Fn + tombol F)
+bindsym XF86MonBrightnessUp exec brightnessctl set +5%
+bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
+
+# Menaikkan, menurunkan, dan mute volume menggunakan tombol media keyboard
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+
+# Mute/Unmute microphone
+bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+# ==========================================
+# MANAJEMEN JENDELA (WINDOW MANAGEMENT)
+# ==========================================
+
+
+# Menggerakkan fokus jendela (Mirip Vim)
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# Memindahkan jendela
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+k move down
+bindsym $mod+Shift+i move up
+bindsym $mod+Shift+l move right
+
+# Mengganti workspace (Ruang Kerja)
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+bindsym $mod+5 workspace number 5
+
+# Memindahkan jendela ke workspace tertentu
+bindsym $mod+Shift+1 move container to workspace number 1
+bindsym $mod+Shift+2 move container to workspace number 2
+bindsym $mod+Shift+3 move container to workspace number 3
+bindsym $mod+Shift+4 move container to workspace number 4
+bindsym $mod+Shift+5 move container to workspace number 5
+
+# Toggle fullscreen
+bindsym $mod+f fullscreen
+
+# Fokus ke mode floating
+bindsym $mod+space floating toggle
+
+# Scratchpad 
+bindsym $mod+Shift+minus move scratchpad
+
+#Jika ada multiple scratchpad windows
+bindsym $mod+minus scratchpad show
+
+# Sharescreen 
+exec systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+exec /usr/libexec/xdg-desktop-portal -r
+exec /usr/libexec/xdg-desktop-portal-wlr
+
+set $firefox MOZ_ENABLE_WAYLAND=1 firefox
+
+# Emoji
+bindsym Mod4+e exec bemoji -t

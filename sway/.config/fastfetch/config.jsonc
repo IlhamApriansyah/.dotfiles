@@ -1,0 +1,59 @@
+{
+    "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+    "logo": {
+        "type": "small",
+        "padding": {
+            "top": 1,
+            "left": 2,
+            "right": 3
+        }
+    },
+    "display": {
+        "separator": " ➜  ", // Menggunakan separator minimalis [cite: 2]
+        "color": "blue",
+        "brightColor": false
+    },
+    "modules": [
+        "title",
+        "separator",
+        {
+            "type": "os",
+            "key": " " // Ikon OS [cite: 3]
+        },
+        {
+            "type": "kernel",
+            "key": " " // Ikon Kernel [cite: 4]
+        },
+        {
+            "type": "shell",
+            "key": " " // Ikon Shell [cite: 5]
+        },
+        {
+            "type": "cpu",
+            "key": " " // Ikon CPU
+        },
+        {
+            "type": "gpu",
+            "key": "󰢮 " // Ikon GPU
+        },
+        {
+            "type": "memory",
+            "key": " " // Ikon RAM [cite: 6]
+        },
+        {
+            "type": "font",
+            "key": " " // Ikon Font
+        },
+        {
+            "type": "battery",
+            "key": " " // Ikon Battery
+        },
+        {
+            "type": "disk",
+            "key": "󰋊 ", // Ikon Disk [cite: 6]
+            "folders": "/" // Hanya root partition agar ringkas [cite: 6]
+        },
+        "break", // Jarak pemisah [cite: 7]
+        "colors" // Kotak warna terminal [cite: 7]
+    ]
+}

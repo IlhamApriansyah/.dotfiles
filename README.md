@@ -9,10 +9,19 @@ Dibuat dengan app **stow** untuk menyimpan dan memilih konfigurasi yang cocok un
 Konfigurasi yang ada :
 1. Sway + Waybar
 2. FastFetch
-4. Vim
+3. Vim
 
 ## Tampilan Konfigurasi 
 
 ### Sway + Waybar
 
-![Waybar](example/Waybar.png)
+![Waybar](example/waybar.png)
+
+## Fastfetch
+
+![Fastfetch](example/fastfetch.png)
+
+## Vim 
+
+
+![Vim](example/vim.png)
